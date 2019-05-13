@@ -76,3 +76,86 @@ Use `cpulimit` to reduce the percentage of CPU that will be assign to this proce
 cpulimit -p 24991 -l 0
 Process 24991 found
 ```
+
+```
+08:09:28 [pool-2-thread-1] - Connection attempt to server '127.0.0.1:27019'.
+08:09:28 [pool-2-thread-1] - Connection attempt to server '127.0.0.1:27019'.
+08:09:28 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:28 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:29 [pool-2-thread-2] - Connection attempt to server '127.0.0.1:27019'.
+08:09:29 [pool-2-thread-2] - Connection attempt to server '127.0.0.1:27019'.
+08:09:29 [pool-2-thread-2] - 	127.0.0.1:27019[open:  1 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:29 [pool-2-thread-2] - 	127.0.0.1:27019[open:  1 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:30 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27018'.
+08:09:30 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27018'.
+08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:30 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27018'.
+08:09:30 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27018'.
+08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:31 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27017'.
+08:09:31 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27017'.
+08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:31 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27017'.
+08:09:31 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27017'.
+08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:32 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:32 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:32 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:32 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:33 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:33 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:33 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:33 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:34 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27019'.
+08:09:34 [pool-2-thread-3] - Connection attempt to server '127.0.0.1:27019'.
+08:09:34 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:34 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:35 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27019'.
+08:09:35 [pool-2-thread-4] - Connection attempt to server '127.0.0.1:27019'.
+08:09:35 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:35 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:36 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:36 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:36 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:36 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:37 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:37 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:37 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:37 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27017'.
+08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
+08:09:38 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:38 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:38 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:38 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27018'.
+08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:39 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27019'.
+08:09:39 [pool-2-thread-6] - Connection attempt to server '127.0.0.1:27019'.
+08:09:39 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  3] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:39 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  3] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:40 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27019'.
+08:09:40 [pool-2-thread-5] - Connection attempt to server '127.0.0.1:27019'.
+08:09:40 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  4] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:09:40 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  4] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+```
