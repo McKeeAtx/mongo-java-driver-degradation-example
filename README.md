@@ -70,3 +70,9 @@ ps -ef | grep mongo | grep "replSet"
 ```
 
 In this example, we pick `24991` (the member that listens on port 27019).
+
+Use `cpulimit` to reduce the percentage of CPU that will be assign to this process:
+```
+cpulimit -p 24991 -l 0
+Process 24991 found
+```
