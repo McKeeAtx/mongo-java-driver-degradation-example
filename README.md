@@ -103,4 +103,4 @@ The server selector algorithm now continues to round-robin connection requests b
 08:09:40 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  4] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 ```
 
-The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, these threads consume the application's thread pool.
+The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, the threads waithing for `127.0.0.1:27019` fully utilize the application's thread pool, rendering the whole application unresponsive although the replica set members `127.0.0.1:27017` and `127.0.0.1:27018` could still serve requests.
