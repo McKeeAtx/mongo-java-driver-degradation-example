@@ -79,7 +79,7 @@ Process 24991 found
 The server selector algorithm now continues to round-robin connection requests between the three replica set members. All members are considered
 * eligible
 * non-stale
-* and within the latency window.
+* and within the latency window:
 ```
 08:09:28 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 08:09:29 [pool-2-thread-2] - 	127.0.0.1:27019[open:  1 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
@@ -102,3 +102,5 @@ The server selector algorithm now continues to round-robin connection requests b
 08:09:39 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  3] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 08:09:40 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  4] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 ```
+
+The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, these threads consume the application's thread pool.
