@@ -1,6 +1,6 @@
 ## Overview
 
-n/a
+Sample project that demonstrates how a single non-responsive replica set member renders a client application unresponsive for multiple minutes.
 
 ## Initial Setup
 
