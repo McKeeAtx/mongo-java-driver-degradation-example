@@ -87,26 +87,589 @@ The server selector algorithm now continues to round-robin connection requests b
 * non-stale
 * and within the latency window:
 ```
-08:09:28 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:29 [pool-2-thread-2] - 	127.0.0.1:27019[open:  1 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:30 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:31 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:32 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:33 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:34 [pool-2-thread-3] - 	127.0.0.1:27019[open:  2 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:35 [pool-2-thread-4] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:36 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:37 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  1] / 
-08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:38 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  2] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:39 [pool-2-thread-6] - 	127.0.0.1:27019[open:  2 waiting:  3] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-08:09:40 [pool-2-thread-5] - 	127.0.0.1:27019[open:  2 waiting:  4] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+11:38:20 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:20 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:20 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:21 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:21 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:21 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:22 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:22 [pool-2-thread-4] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:22 [pool-2-thread-4] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:23 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:23 [pool-2-thread-5] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:23 [pool-2-thread-5] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:24 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:24 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:24 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:25 [pool-2-thread-1] - Roundtrip times (micro): {127.0.0.1:27019: 1889, 127.0.0.1:27018: 2052, 127.0.0.1:27017: 1151}
+11:38:25 [pool-2-thread-1] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:25 [pool-2-thread-1] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:26 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:26 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:26 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:27 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:27 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:27 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:28 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:28 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:28 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:29 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:29 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:29 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:30 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:30 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:30 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:31 [pool-2-thread-1] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:31 [pool-2-thread-1] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:32 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:32 [pool-2-thread-2] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:32 [pool-2-thread-2] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:33 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:33 [pool-2-thread-3] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:33 [pool-2-thread-3] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:34 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:34 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:34 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:35 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1820, 127.0.0.1:27017: 1096}
+11:38:35 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:35 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:36 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:36 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:36 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:37 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:37 [pool-2-thread-2] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:37 [pool-2-thread-2] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:38 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:38 [pool-2-thread-3] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:38 [pool-2-thread-3] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:39 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:39 [pool-2-thread-4] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:39 [pool-2-thread-4] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:40 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:40 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:40 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:41 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:41 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:41 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 1, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:42 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:42 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 1, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:43 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:43 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:44 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:45 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1586, 127.0.0.1:27017: 1007}
+11:38:45 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:45 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1445, 127.0.0.1:27017: 982}
+11:38:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:38:47 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1445, 127.0.0.1:27017: 982}
+11:38:47 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:47 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:48 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1445, 127.0.0.1:27017: 982}
+11:38:48 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:48 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:38:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 1445, 127.0.0.1:27017: 982}
+11:38:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:43 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 800, 127.0.0.1:27017: 763}
+11:40:43 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:44 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 800, 127.0.0.1:27017: 763}
+11:40:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:44 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 800, 127.0.0.1:27017: 763}
+11:40:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:40:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:40:44 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 800, 127.0.0.1:27017: 763}
+11:40:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 769, 127.0.0.1:27017: 739}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 769, 127.0.0.1:27017: 739}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:40:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 769, 127.0.0.1:27017: 739}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 769, 127.0.0.1:27017: 739}
+11:40:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:40:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 769, 127.0.0.1:27017: 739}
+11:40:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:43 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 906, 127.0.0.1:27017: 900}
+11:42:43 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:44 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 906, 127.0.0.1:27017: 900}
+11:42:44 [pool-2-thread-4] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:46 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 888, 127.0.0.1:27017: 882}
+11:42:46 [pool-2-thread-6] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 888, 127.0.0.1:27017: 882}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:42:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 888, 127.0.0.1:27017: 882}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:42:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 888, 127.0.0.1:27017: 882}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:42:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 1686, 127.0.0.1:27018: 888, 127.0.0.1:27017: 882}
+11:42:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:43:24 [pool-2-thread-1] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 1, waiting: 5],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:43:39 [pool-2-thread-2] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 1, waiting: 5],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:23 [pool-2-thread-3] - 	connect t0 127.0.0.1:27019: {127.0.0.1:27019[open: 1, waiting: 5],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:49 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:50 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:50 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:51 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:44:52 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 69689612, 127.0.0.1:27018: 828, 127.0.0.1:27017: 816}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:44:52 [pool-2-thread-5] - 	connect t0 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+
+Process finished with exit code 130 (interrupted by signal 2: SIGINT)
+
 ```
 
 The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, the threads waithing for `127.0.0.1:27019` fully utilize the application's thread pool, rendering the whole application unresponsive although the replica set members `127.0.0.1:27017` and `127.0.0.1:27018` could still serve requests.
