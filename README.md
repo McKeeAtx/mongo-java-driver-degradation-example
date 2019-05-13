@@ -21,3 +21,12 @@ mongo
 > rs.initiate(rsconf)
 { "ok" : 1 }
 ```
+
+Create the test database:
+```
+rs0:PRIMARY> use test
+mongo
+switched to db test
+```
+
+Run `DataFixture` to insert 10000 documents into the `test` collection within the `test` database. 
