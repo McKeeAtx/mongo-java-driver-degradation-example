@@ -76,7 +76,10 @@ Use `cpulimit` to reduce the percentage of CPU that will be assign to this proce
 cpulimit -p 24991 -l 0
 Process 24991 found
 ```
-
+The server selector algorithm now continues to round-robin connection requests between the three replica set members. All members are considered
+* eligible
+* non-stale
+* and within the latency window.
 ```
 08:09:28 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 08:09:29 [pool-2-thread-2] - 	127.0.0.1:27019[open:  1 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
