@@ -58,3 +58,15 @@ Example (the output is somewhat redundant):
 08:01:39 [pool-2-thread-2] - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 08:01:39 [pool-2-thread-2] - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
 ```
+
+## Degrade a single replica set member
+
+Determine the `PID` of a replica set member:
+```
+ps -ef | grep mongo | grep "replSet"
+  501 24989 11889   0  7:42AM ttys001    0:30.81 mongod --replSet rs0 --port 27017 --bind_ip 127.0.0.1 --dbpath rs0-0 --smallfiles --oplogSize 128
+  501 24990 11905   0  7:42AM ttys002    0:30.02 mongod --replSet rs0 --port 27018 --bind_ip 127.0.0.1 --dbpath rs0-1 --smallfiles --oplogSize 128
+  501 24991 11922   0  7:42AM ttys005    0:30.03 mongod --replSet rs0 --port 27019 --bind_ip 127.0.0.1 --dbpath rs0-2 --smallfiles --oplogSize 128
+```
+
+In this example, we pick `24991` (the member that listens on port 27019).
