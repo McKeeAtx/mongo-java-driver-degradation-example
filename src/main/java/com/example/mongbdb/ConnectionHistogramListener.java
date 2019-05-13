@@ -7,6 +7,7 @@ import com.mongodb.event.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 class ConnectionHistogramListener implements ConnectionPoolListener {
 
@@ -46,14 +47,13 @@ class ConnectionHistogramListener implements ConnectionPoolListener {
         }
 
         private void logHistogram(ConnectionPoolWaitQueueEnteredEvent event) {
-            LOGGER.trace(String.format("Connection attempt to server '%s'.", event.getServerId().getAddress()));
-            String line = "";
+            List<String> lines = new LinkedList<>();
             for (ServerAddress address : connectedThreads.keySet()) {
                 int connected = connectedThreads.get(address).get();
                 int waiting = waitingThreads.get(address).get();
-                line += String.format("%s[open: %2d waiting: %2d] / ", address, connected, waiting);
+                lines.add(String.format("%s[connected: %1d, waiting: %1d]", address, connected, waiting));
             }
-            LOGGER.trace("\t" + line);
+            LOGGER.trace(String.format("\tconnect t0 %s: {", event.getServerId().getAddress()) + lines.stream().collect(Collectors.joining(",")) + "}");
         }
 
     }

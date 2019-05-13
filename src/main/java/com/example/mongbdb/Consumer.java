@@ -27,7 +27,6 @@ public class Consumer {
             });
             Thread.sleep(1000);
         }
-
     }
 
 }

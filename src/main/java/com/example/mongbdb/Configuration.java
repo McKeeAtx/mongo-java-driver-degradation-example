@@ -1,6 +1,5 @@
 package com.example.mongbdb;
 
-import com.mongodb.Block;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ReadPreference;
 import com.mongodb.ServerAddress;
@@ -10,7 +9,6 @@ import com.mongodb.connection.ClusterConnectionMode;
 import com.mongodb.connection.ClusterSettings;
 import com.mongodb.connection.ConnectionPoolSettings;
 import com.mongodb.connection.SocketSettings;
-import com.mongodb.selector.LatencyMinimizingServerSelector;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 import static java.util.Arrays.asList;
 
 public class Configuration {
-
 
     private static ClusterConnectionMode mode = ClusterConnectionMode.MULTIPLE;
 
@@ -61,6 +58,7 @@ public class Configuration {
                                 .mode(mode)
                                 .hosts(servers)
                                 .maxWaitQueueSize(maxWaitQueueSize)
+                                .serverSelector(new RoundtripTimeTracingSelector())
                                 .build()))
                 .build());
     }
