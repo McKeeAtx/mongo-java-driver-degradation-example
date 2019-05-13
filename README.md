@@ -129,3 +129,77 @@ The node `127.0.0.1:27019` is not responding to requests in a timely manner, whi
 After a couple of minutes, the threads waiting for `127.0.0.1:27019` either return or time out and the driver stops to route further requests to `127.0.0.1:27019`. The application then recovers, distributing the traffic between the healthy replica set members `127.0.0.1:27017` and `127.0.0.1:27018`.
 
 From the users' point of view, this behavior causes a complete outage of the client application that lasts multiple minutes.
+
+## Consumer.java
+
+```
+public class Consumer {
+
+    public static void main( String[] args ) throws ExecutionException, InterruptedException, IOException {
+        MongoClient client = Configuration.createClient(true);
+        MongoDatabase db = client.getDatabase("test");
+        final MongoCollection<Document> customers = db.getCollection("test");
+        ExecutorService executorService = Executors.newFixedThreadPool(6);
+
+        for (;;) {
+            executorService.submit(() -> {
+                FindIterable<Document> documents = customers.find();
+                documents.into(new LinkedList<>());
+            });
+            Thread.sleep(1000);
+        }
+    }
+}
+```
+
+### Configuration.java
+```
+public class Configuration {
+    
+    private static ClusterConnectionMode mode = ClusterConnectionMode.MULTIPLE;
+
+    private static int minConnections = 2;
+
+    private static int maxConnections = 2;
+
+    private static int maxWaitQueueSize = 6;
+
+    private static int connectionTimeoutInMs =  500;
+
+    private static int readTimeoutInSeconds = 45;
+
+
+    static List<ServerAddress> servers = asList(
+            new ServerAddress("127.0.0.1", 27017),
+            new ServerAddress("127.0.0.1", 27018),
+            new ServerAddress("127.0.0.1", 27019)
+    );
+
+    static MongoClient createClient(boolean withHistogramListener) {
+        return MongoClients.create(MongoClientSettings.builder()
+                .applyToConnectionPoolSettings(builder -> builder.applySettings(
+                        ConnectionPoolSettings.builder()
+                                .addConnectionPoolListener(withHistogramListener ? new ConnectionHistogramListener() : new NoOpListener())
+                                .minSize(minConnections)
+                                .maxSize(maxConnections)
+                                .maxWaitQueueSize(maxWaitQueueSize)
+                                .build()))
+                .readPreference(ReadPreference.nearest())
+                .applyToSocketSettings(builder -> builder.applySettings(
+                        SocketSettings.builder()
+                                .connectTimeout(connectionTimeoutInMs, TimeUnit.MILLISECONDS)
+                                .readTimeout(readTimeoutInSeconds, TimeUnit.SECONDS)
+                                .build()
+                ))
+
+                .applyToClusterSettings(builder -> builder.applySettings(
+                        ClusterSettings.builder()
+                                .mode(mode)
+                                .hosts(servers)
+                                .maxWaitQueueSize(maxWaitQueueSize)
+                                .serverSelector(new RoundtripTimeTracingSelector())
+                                .build()))
+                .build());
+    }
+}
+```
