@@ -7,9 +7,9 @@ import org.bson.Document;
 
 public class DataFixture {
 
-    public static void main( String[] args ) throws InterruptedException {
-        MongoClient client = Configuration.createClient();
-        MongoDatabase db = client.getDatabase("bv");
+    public static void main( String[] args ) {
+        MongoClient client = Configuration.createClient(false);
+        MongoDatabase db = client.getDatabase("test");
 
         db.createCollection("test");
         MongoCollection<Document> collection = db.getCollection("test");

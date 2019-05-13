@@ -15,8 +15,8 @@ import java.util.concurrent.Executors;
 public class Consumer {
 
     public static void main( String[] args ) throws ExecutionException, InterruptedException, IOException {
-        MongoClient client = Configuration.createClient();
-        MongoDatabase db = client.getDatabase("bv");
+        MongoClient client = Configuration.createClient(true);
+        MongoDatabase db = client.getDatabase("test");
         final MongoCollection<Document> customers = db.getCollection("test");
         ExecutorService executorService = Executors.newFixedThreadPool(6);
 

@@ -39,51 +39,29 @@ public class Configuration {
             new ServerAddress("127.0.0.1", 27019)
     );
 
-    static MongoClient createClient() {
-
-        Configuration config = new Configuration();
-
+    static MongoClient createClient(boolean withHistogramListener) {
         return MongoClients.create(MongoClientSettings.builder()
-                .applyToConnectionPoolSettings(new Block<ConnectionPoolSettings.Builder>() {
-                    @Override
-                    public void apply(ConnectionPoolSettings.Builder builder) {
-                        builder.applySettings(
-                                ConnectionPoolSettings.builder()
-                                        .addConnectionPoolListener(new ConnectionHistogramListener())
-                                        .minSize(minConnections)
-                                        .maxSize(maxConnections)
-                                        .maxWaitQueueSize(maxWaitQueueSize)
-                                        .build());
-                    }
-                })
+                .applyToConnectionPoolSettings(builder -> builder.applySettings(
+                        ConnectionPoolSettings.builder()
+                                .addConnectionPoolListener(withHistogramListener ? new ConnectionHistogramListener() : new NoOpListener())
+                                .minSize(minConnections)
+                                .maxSize(maxConnections)
+                                .maxWaitQueueSize(maxWaitQueueSize)
+                                .build()))
                 .readPreference(ReadPreference.nearest())
-                .applyToSocketSettings(new Block<SocketSettings.Builder>() {
-                    @Override
-                    public void apply(SocketSettings.Builder builder) {
-                        builder.applySettings(
-                                SocketSettings.builder()
-                                        // The amount of time we will wait when establishing a new connection
-                                        .connectTimeout(connectionTimeoutInMs, TimeUnit.MILLISECONDS)
-                                        // The amount of time we will wait when performing queries before giving up
-                                        // We want this to be long enough to handle the long queries,
-                                        // but short enought that if a server dies, it doesn't back up the waiting threads too much
-                                        .readTimeout(readTimeoutInSeconds, TimeUnit.SECONDS)
-                                        .build()
-                        );
-                    }
-                })
+                .applyToSocketSettings(builder -> builder.applySettings(
+                        SocketSettings.builder()
+                                .connectTimeout(connectionTimeoutInMs, TimeUnit.MILLISECONDS)
+                                .readTimeout(readTimeoutInSeconds, TimeUnit.SECONDS)
+                                .build()
+                ))
 
-                .applyToClusterSettings(new Block<ClusterSettings.Builder>() {
-                    @Override
-                    public void apply(ClusterSettings.Builder builder) {
-                        builder.applySettings(
-                                ClusterSettings.builder()
-                                        .mode(mode)
-                                        .hosts(servers)
-                                        .maxWaitQueueSize(maxWaitQueueSize)
-                                        .build());
-                    }
-                })
+                .applyToClusterSettings(builder -> builder.applySettings(
+                        ClusterSettings.builder()
+                                .mode(mode)
+                                .hosts(servers)
+                                .maxWaitQueueSize(maxWaitQueueSize)
+                                .build()))
                 .build());
     }
 }
