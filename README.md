@@ -2,7 +2,7 @@
 
 n/a
 
-## Setup
+## Initial Setup
 
 Create three empty directories `rs0-0`, `rs0-1` and `rs0-2`.
 
@@ -30,3 +30,15 @@ switched to db test
 ```
 
 Run `DataFixture` to insert 10000 documents into the `test` collection within the `test` database. 
+
+## Running the example
+
+Start three mongod instances:
+
+```
+mongod --replSet rs0 --port 27017 --bind_ip 127.0.0.1 --dbpath rs0-0 --smallfiles --oplogSize 128
+mongod --replSet rs0 --port 27018 --bind_ip 127.0.0.1 --dbpath rs0-1 --smallfiles --oplogSize 128
+mongod --replSet rs0 --port 27019 --bind_ip 127.0.0.1 --dbpath rs0-2 --smallfiles --oplogSize 128
+```
+
+Run the `Consumer` application.
