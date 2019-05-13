@@ -85,43 +85,46 @@ Process 24991 found
 The server selector algorithm now continues to round-robin connection requests between the three replica set members. All members are considered
 * eligible
 * non-stale
-* and within the latency window:
+* and within the latency window.
+
+
+Example log:
 ```
 11:47:34 [pool-2-thread-1] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:34 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
-11:47:34 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:34 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 0, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+11:47:34 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 0, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:35 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:35 [pool-2-thread-2] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
-11:47:35 [pool-2-thread-2] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:47:35 [pool-2-thread-2] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+11:47:35 [pool-2-thread-2] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
 
 // now the node 127.0.0.1:27019 is 'frozen'
 cpulimit -p 24991 -l 0
 Process 24991 found
 
 11:47:36 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:36 [pool-2-thread-3] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
-11:47:36 [pool-2-thread-3] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 0, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:47:36 [pool-2-thread-3] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+11:47:36 [pool-2-thread-3] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
 11:47:37 [pool-2-thread-4] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:37 [pool-2-thread-4] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 0, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:37 [pool-2-thread-4] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 0, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:38 [pool-2-thread-5] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:38 [pool-2-thread-5] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 1, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:38 [pool-2-thread-5] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 1, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:39 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:39 [pool-2-thread-6] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
-11:47:39 [pool-2-thread-6] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[open: 2, waiting: 0],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 1]}
+11:47:39 [pool-2-thread-6] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+11:47:39 [pool-2-thread-6] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
 11:47:40 [pool-2-thread-1] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:40 [pool-2-thread-1] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
-11:47:40 [pool-2-thread-1] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 0],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:40 [pool-2-thread-1] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+11:47:40 [pool-2-thread-1] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:41 [pool-2-thread-2] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:41 [pool-2-thread-2] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 1],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:41 [pool-2-thread-2] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:42 [pool-2-thread-3] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:42 [pool-2-thread-3] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:42 [pool-2-thread-3] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:43 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:43 [pool-2-thread-6] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
-11:47:43 [pool-2-thread-6] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[open: 2, waiting: 2],127.0.0.1:27018[open: 0, waiting: 1],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:43 [pool-2-thread-6] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+11:47:43 [pool-2-thread-6] - 	connect to 127.0.0.1:27018: {127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:44 [pool-2-thread-1] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 3286, 127.0.0.1:27017: 2081}
-11:47:44 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 3],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:44 [pool-2-thread-1] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 3],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 11:47:45 [pool-2-thread-6] - Roundtrip times (micro): {127.0.0.1:27019: 3257, 127.0.0.1:27018: 2885, 127.0.0.1:27017: 1917}
-11:47:45 [pool-2-thread-6] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
+11:47:45 [pool-2-thread-6] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 4],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 ```
 
 The node `127.0.0.1:27019` is not responding to requests in a timely manner, but it is still selected by the server selection algorithm because it still falls within the acceptable latency window according to the stale roundtrip data. With every decision in favor `127.0.0.1:27019`, another thread piles up waiting for a response or a connection. 
