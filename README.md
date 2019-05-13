@@ -2,6 +2,12 @@
 
 Sample project that demonstrates how a single non-responsive replica set member renders a client application unresponsive for multiple minutes.
 
+The following local setup was used during testing:
+* OpenJDK 1.8.0_121
+* macOS High Sierra 10.13.6
+* mongod version v3.4.20
+* mongo-java-driver 3.10.2
+
 ## Initial Setup
 
 Create three empty directories `rs0-0`, `rs0-1` and `rs0-2`.
