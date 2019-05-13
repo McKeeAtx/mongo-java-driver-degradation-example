@@ -124,7 +124,7 @@ Process 24991 found
 11:47:45 [pool-2-thread-6] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[open: 2, waiting: 4],127.0.0.1:27018[open: 0, waiting: 0],127.0.0.1:27017[open: 0, waiting: 0]}
 ```
 
-The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, the threads waithing for `127.0.0.1:27019` fully utilize the application's thread pool, rendering the whole application unresponsive although the replica set members `127.0.0.1:27017` and `127.0.0.1:27018` could still serve requests.
+The node `127.0.0.1:27019` is not responding to requests in a timely manner, which causes threads to pile up waiting for a response or a connection. Eventually, all threads within the application's thread pool will be waiting for `127.0.0.1:27019`, rendering the whole application unresponsive although the replica set members `127.0.0.1:27017` and `127.0.0.1:27018` could still serve requests.
 
 After a couple of minutes, the threads waiting for `127.0.0.1:27019` either return or time out and the driver stops to route further requests to `127.0.0.1:27019`. The application then recovers, distributing the traffic between the healthy replica set members `127.0.0.1:27017` and `127.0.0.1:27018`.
 
