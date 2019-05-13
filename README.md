@@ -48,15 +48,11 @@ The `ConnectionHistogramListener` logs a simple histogram every time a `Connecti
 * `waiting`: no of threads that are waiting for a conncetion
 
 Example (the output is somewhat redundant):
-```07:57:02 [pool-2-thread-1] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27018'.
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27018'.
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27018'.
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27018'.
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-07:57:02 [pool-2-thread-1] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-07:57:03 [pool-2-thread-2] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27019'.
-07:57:03 [pool-2-thread-2] TRACE histogram:41 - Connection attempt to server '127.0.0.1:27019'.
-07:57:03 [pool-2-thread-2] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
-07:57:03 [pool-2-thread-2] TRACE histogram:41 - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / ```
+```08:01:38 [pool-2-thread-1] - Connection attempt to server '127.0.0.1:27019'.
+08:01:38 [pool-2-thread-1] - Connection attempt to server '127.0.0.1:27019'.
+08:01:38 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:01:38 [pool-2-thread-1] - 	127.0.0.1:27019[open:  0 waiting:  1] / 127.0.0.1:27018[open:  0 waiting:  0] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:01:39 [pool-2-thread-2] - Connection attempt to server '127.0.0.1:27018'.
+08:01:39 [pool-2-thread-2] - Connection attempt to server '127.0.0.1:27018'.
+08:01:39 [pool-2-thread-2] - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / 
+08:01:39 [pool-2-thread-2] - 	127.0.0.1:27019[open:  0 waiting:  0] / 127.0.0.1:27018[open:  0 waiting:  1] / 127.0.0.1:27017[open:  0 waiting:  0] / ```
