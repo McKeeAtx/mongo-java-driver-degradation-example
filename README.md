@@ -127,6 +127,24 @@ Process 24991 found
 
 The node `127.0.0.1:27019` is not responding to requests in a timely manner, but it is still selected by the server selection algorithm because it still falls within the acceptable latency window according to the stale roundtrip data. With every decision in favor `127.0.0.1:27019`, another thread piles up waiting for a response or a connection. 
 
+A reduced version of the above log shows how threads pile up waiting for 127.0.0.1:27019:
+```
+127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+127.0.0.1:27019[connected: 0, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 1, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 2],127.0.0.1:27018[connected: 0, waiting: 1],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 3],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+127.0.0.1:27019[connected: 2, waiting: 4],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
+```
+
 Eventually, all threads within the application's thread pool (fixed pool with 6 threads in the sample application) will be waiting for `127.0.0.1:27019`, rendering the whole application unresponsive although the replica set members `127.0.0.1:27017` and `127.0.0.1:27018` could still serve requests.
 
 After a couple of minutes, the threads waiting for `127.0.0.1:27019` either return or time out and the driver stops to route further requests to `127.0.0.1:27019`. The application then recovers, distributing the traffic between the healthy replica set members `127.0.0.1:27017` and `127.0.0.1:27018`.
