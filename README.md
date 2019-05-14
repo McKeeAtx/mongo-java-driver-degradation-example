@@ -127,7 +127,7 @@ Process 24991 found
 
 The node `127.0.0.1:27019` is not responding to requests in a timely manner, but it is still selected by the server selection algorithm because it still falls within the acceptable latency window according to the stale roundtrip data. With every decision in favor `127.0.0.1:27019`, another thread piles up waiting for a response or a connection. 
 
-A reduced version of the above log shows how threads pile up waiting for 127.0.0.1:27019:
+A reduced version of the above log shows how threads pile up waiting for `127.0.0.1:27019`:
 ```
 127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
 127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
