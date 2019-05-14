@@ -53,7 +53,7 @@ The `ConnectionHistogramListener` logs a simple histogram every time a `Connecti
 * `connected`: no of threads that have acquired a connection to the member
 * `waiting`: no of threads that are waiting for a connection to the member
 
-Example (the output is somewhat redundant):
+Example:
 ```
 11:47:41 [pool-2-thread-2] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 ```
