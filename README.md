@@ -55,8 +55,13 @@ The `ConnectionHistogramListener` logs a simple histogram every time a `Connecti
 
 Example (the output is somewhat redundant):
 ```
-11:47:36 [pool-2-thread-3] - 	connect to 127.0.0.1:27017: {127.0.0.1:27019[connected: 0, waiting: 0],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 1]}
+11:47:41 [pool-2-thread-2] - 	connect to 127.0.0.1:27019: {127.0.0.1:27019[connected: 2, waiting: 1],127.0.0.1:27018[connected: 0, waiting: 0],127.0.0.1:27017[connected: 0, waiting: 0]}
 ```
+The above line reads as:
+* `connect to 127.0.0.1:27019`: the driver selects `127.0.0.1:27019` for the next connection request
+* `127.0.0.1:27019[connected: 2, waiting: 1]` 2 threads are connected to `127.0.0.1:27019`, 1 thread is waiting for a connection
+* `127.0.0.1:27018[connected: 0, waiting: 0]` 0 threads are connected to `127.0.0.1:27019`, 0 threads are waiting for a connection
+* `127.0.0.1:27017[connected: 0, waiting: 0]` 0 threads are connected to `127.0.0.1:27019`, 0 threads are waiting for a connection
 
 ## Degrade a single replica set member
 
